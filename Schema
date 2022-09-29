@@ -1,0 +1,171 @@
+type BbtReferencedata {
+	_id: String!
+	docType: String!
+}
+
+type BbtReferencedataConnection {
+	items: [BbtReferencedata]
+	nextToken: String 
+}
+
+input CreateBbtReferencedataInput {
+	_id: String!
+	docType: String! 
+}
+
+input DeleteBbtReferencedataInput {
+	_id: String!
+	docType: String!
+}
+
+type Mutation { 
+	createBbtReferencedata(input: CreateBbtReferencedataInput!): BbtReferencedata
+	updateBbtReferencedata(input: UpdateBbtReferencedataInput!): BbtReferencedata
+	deleteBbtReferencedata(input: DeleteBbtReferencedataInput!): BbtReferencedata
+	updateWBFS(input: inputWBFS!): WBFS
+}
+
+type Query {
+	getBbtReferencedata(_id: String!, docType: String!): BbtReferencedata
+	listBbtReferencedata(filter: TableBbtReferencedataFilterInput, limit: Int, nextToken: String): BbtReferencedataConnection
+	getWBFS(FuelCode: String!): WBFS
+}
+
+type Subscription {
+	onCreateBbtReferencedata(_id: String, docType: String): BbtReferencedata
+		@aws_subscribe(mutations: ["createBbtReferencedata"])
+	onUpdateBbtReferencedata(_id: String, docType: String): BbtReferencedata
+		@aws_subscribe(mutations: ["updateBbtReferencedata"])
+	onDeleteBbtReferencedata(_id: String, docType: String): BbtReferencedata
+		@aws_subscribe(mutations: ["deleteBbtReferencedata"])
+}
+
+input TableBbtReferencedataFilterInput {
+	_id: TableStringFilterInput
+	docType: TableStringFilterInput
+}
+
+input TableBooleanFilterInput {
+	ne: Boolean
+	eq: Boolean
+}
+
+input TableFloatFilterInput {
+	ne: Float
+	eq: Float
+	le: Float
+	lt: Float
+	ge: Float
+	gt: Float
+	contains: Float
+	notContains: Float
+	between: [Float]
+}
+
+input TableIDFilterInput {
+	ne: ID
+	eq: ID
+	le: ID
+	lt: ID
+	ge: ID
+	gt: ID
+	contains: ID
+	notContains: ID
+	between: [ID]
+	beginsWith: ID
+}
+
+input TableIntFilterInput {
+	ne: Int
+	eq: Int
+	le: Int
+	lt: Int
+	ge: Int
+	gt: Int
+	contains: Int
+	notContains: Int
+	between: [Int]
+}
+
+input TableStringFilterInput {
+	ne: String
+	eq: String
+	le: String
+	lt: String
+	ge: String
+	gt: String
+	contains: String
+	notContains: String
+	between: [String]
+	beginsWith: String
+}
+
+input UpdateBbtReferencedataInput {
+	_id: String!
+	docType: String!
+}
+
+type WBFS {
+	FuelCode: String!
+	_id: String!
+	data: WBFSData
+}
+
+type WBFSData {
+	FuelHeader: WBFSFuelHeader
+	FuelLoadingItems: [WBFSFuelLoadingItems]
+}
+
+type WBFSFuelHeader {
+	FwdGalRange1: Int
+	FwdGalRange2: Int
+	FwdGalRange3: Int
+	Fwdrange1Coe: [String]
+	Fwdrange2Coe: [String]
+	Fwdrange3Coe: [String]
+	Fwdrange4Coe: [String]
+	RearGalrangeLimit1: Int
+	RearGalrangeLimit2: Int
+	RearGalrangeLimit3: Int 
+	Rearrange1Coe: [String]
+	Rearrange2Coe: [String]
+	Rearrange3Coe: [String]
+	Rearrange4Coe: [String]
+}
+
+type WBFSFuelLoadingItems {
+	FuelLoadTankpair: [String]
+	TotalFuelLoad: Int
+}
+
+input WBFSInputData {
+	FuelHeader: WBFSInputFuelHeader
+	FuelLoadingItems: [WBFSInputFuelLoadingItems]
+}
+
+input WBFSInputFuelHeader {
+	FwdGalRange1: Int
+	FwdGalRange2: Int
+	FwdGalRange3: Int
+	Fwdrange1Coe: [String]
+	Fwdrange2Coe: [String]
+	Fwdrange3Coe: [String] 
+	Fwdrange4Coe: [String]
+	RearGalrangeLimit1: Int
+	RearGalrangeLimit2: Int
+	RearGalrangeLimit3: Int
+	Rearrange1Coe: [String]
+	Rearrange2Coe: [String]
+	Rearrange3Coe: [String]
+	Rearrange4Coe: [String]
+}
+
+input WBFSInputFuelLoadingItems {
+	FuelLoadTankpair: [String]
+	TotalFuelLoad: Int
+}
+
+input inputWBFS {
+	FuelCode: String!
+	data: WBFSInputData
+}
